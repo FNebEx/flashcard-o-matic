@@ -8,13 +8,18 @@ The final project for the Chegg Skills Frontend Web Development course.
 2. With `DeckPage.jsx` and `DeckStudyPage.jsx`, the state variables are `null` until the `useEffect` runs. 
 3. Run tests.
 4. Get the `<NotFound />` component to work properly.
+5. Get the `useNavigate` hook working after a use completes an action. 
 
 ### Routes to complete
 
-✅ :`/`
-✅ :`/decks/:deckId/study`
-⭕:`/decks/new`
-✅ :`/decks/:deckId`
-⭕ :`/decks/:deckId/edit`
-⭕ :`/decks/:deckId/cards/new`
-⭕ :`/decks/:deckId/cards/:cardId/edit`
+1. ✅ :`/`
+2. ✅ :`/decks/:deckId/study`
+3. ✅ :`/decks/new`
+4. ✅ :`/decks/:deckId`
+5. ✅ :`/decks/:deckId/edit`
+6. ⭕ :`/decks/:deckId/cards/new`
+7. ⭕ :`/decks/:deckId/cards/:cardId/edit`
+
+### Featuers to complete
+
+1. Add the breadcrumbs to each page. 
