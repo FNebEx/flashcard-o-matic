@@ -3,12 +3,23 @@ import { useParams } from "react-router-dom";
 import { readDeck } from "../utils/api";
 
 function DeckStudyPage() {
+  /**
+   * TODO
+   * 1. After the user views the final card in the deck, a prompt
+   * comes up asking if the want to start the deck over. If the
+   * user wants to restart the deck, start from the frist card.
+   * If the user doesn't want to restart the deck, they are
+   * taken back to the homescreen.
+   *
+   */
+
   const { deckId } = useParams();
   const [cards, setCards] = useState(null);
   const [index, setIndex] = useState(0);
   const [flip, setFlip] = useState(false);
 
   let currentCard = [];
+  let length = 0;
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -21,11 +32,11 @@ function DeckStudyPage() {
     }
 
     loadData();
-  }, []);
+  }, [deckId]);
 
   if (cards && cards.cards) {
     currentCard = cards.cards[index];
-    
+    length = cards.cards.length;
   }
 
   const handleFlip = () => {
@@ -33,7 +44,13 @@ function DeckStudyPage() {
   };
 
   const handleNext = () => {
-    setIndex(index >= currentCard.length - 1 ? 0 : index + 1);
+    setIndex(index >= length - 1 ? 0 : index + 1);
+
+
+    if(index  === length) {
+      alert(3)
+    }
+
     setFlip(false);
   };
 
@@ -41,22 +58,35 @@ function DeckStudyPage() {
     <>
       <h1>Study: {cards && cards.name}</h1>
 
-      <div className="card">
-        <div className="card-body">
-          <h4>
-            {index + 1} of {cards && currentCard.length}
-          </h4>
-          <p>{flip ? currentCard.back : currentCard.front }</p>
-          <button
-            className="btn btn-secondary"
-            onClick={handleFlip}
-            disabled={flip}
-          >
-            Flip
-          </button>
-          {flip && <button className="btn btn-primary" onClick={handleNext}>Next</button>}
+      {length === 0 ? (
+        <>
+          <h3>Not enough cards</h3>
+          <p>You need at least 3 cards to study. There are {length} cards this deck. </p>
+          {/* Links to the "Add Card" Screen */}
+          <button className="btn btn-primary">Add Card</button>
+        </>
+      ) : (
+        <div className="card">
+          <div className="card-body">
+            <h4>
+              {index + 1} of {cards && length}
+            </h4>
+            <p>{flip ? currentCard?.back : currentCard?.front}</p>
+            <button
+              className="btn btn-secondary"
+              onClick={handleFlip}
+              disabled={flip}
+            >
+              Flip
+            </button>
+            {flip && (
+              <button className="btn btn-primary" onClick={handleNext}>
+                Next
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
