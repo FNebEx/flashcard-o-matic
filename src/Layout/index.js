@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import DeckList from "../Deck/DeckList";
-import { listDecks } from "../utils/api";
+import { deleteDeck, listDecks } from "../utils/api";
 import DeckPage from "../Deck/DeckPage";
 import DeckStudyPage from "../Deck/DeckStudyPage";
+import NewDeckPage from "../Deck/NewDeckPage";
+import DeckEditPage from "../Deck/DeckEditPage";
 
 function Layout() {
   /**
@@ -15,12 +17,13 @@ function Layout() {
    */
 
   const [decks, setDecks] = useState(null);
+  const navigate = useNavigate();
+
+  const abortController = new AbortController();
+  const signal = abortController.signal;
 
   useEffect(() => {
-    const abortController = new AbortController();
-
     async function loadData() {
-      const signal = abortController.signal;
       const data = await listDecks(signal);
 
       setDecks(data);
@@ -31,6 +34,13 @@ function Layout() {
     // return abortController.abort();
   }, []);
 
+  const hadndleDeleteDeck = async (id) => {
+    if (window.confirm(`Are you sure you want to delete record ${id}`)) {
+      await deleteDeck(id, signal);
+      navigate('/')
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -39,11 +49,19 @@ function Layout() {
 
         {/* Routes */}
         <Routes>
-          <Route path="/" element={<DeckList decks={decks} />} />
+          <Route
+            path="/"
+            element={
+              <DeckList decks={decks} handleDelete={hadndleDeleteDeck} />
+            }
+          />
           {/* Deck Routes */}
           <Route path="/decks">
+            <Route path="new" element={<NewDeckPage />} />
             <Route path=":deckId" element={<DeckPage />} />
             <Route path=":deckId/study" element={<DeckStudyPage />} />
+            <Route path=":deckId/edit" element={<DeckEditPage />} />
+
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
