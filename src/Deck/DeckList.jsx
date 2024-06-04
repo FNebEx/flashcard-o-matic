@@ -1,13 +1,28 @@
+import { Link } from "react-router-dom";
 import Deck from "./Deck";
 
-function DeckList({ decks }) {
+function DeckList({ decks, handleDelete }) {
   return (
     <>
       {/* Should probably be a link to /deck/new */}
-      <button className="btn btn-secondary">Create Deck</button>
-      {decks && decks.map(({ id, name, description }) => (
-        <Deck key={id} name={name} description={description} id={id}/>
-      ))}
+      <Link className="btn btn-secondary" to={"/decks/new"}>
+        Create Deck
+      </Link>
+      {decks &&
+        decks.map((deck) => {
+          // console.log(deck);
+
+          return (
+            <Deck
+              key={deck.id}
+              id={deck.id}
+              name={deck.name}
+              description={deck.description}
+              cards={deck.cards.length}
+              handleDelete={handleDelete}
+            />
+          );
+        })}
     </>
   );
 }
