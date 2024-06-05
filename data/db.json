@@ -16,8 +16,8 @@
       "id": 0.36530432183842665
     },
     {
-      "name": "Here is a name!!!",
-      "description": "A real description of what the deck does. ",
+      "name": "Redux",
+      "description": "State management.",
       "id": 0.20212932003006445
     }
   ],
@@ -118,9 +118,17 @@
       "deckId": "0.20212932003006445"
     },
     {
-      "front": "Why is a raven like a writing desk? ",
-      "back": "Because it can produce a few notes, though they are very flat; and it is never put with the wrong end in front!",
-      "id": "_4xjk2m9",
+      "front": "How to delete an item? ",
+      "back": "Use a delete handler. ",
+      "deckID": "0.20212932003006445",
+      "id": "_c89ggnk",
+      "deckId": 0.20212932003006445
+    },
+    {
+      "front": "What is an action? ",
+      "back": "an object with data. ",
+      "deckID": "0.20212932003006445",
+      "id": "_cgs2ntv",
       "deckId": 0.20212932003006445
     }
   ]
