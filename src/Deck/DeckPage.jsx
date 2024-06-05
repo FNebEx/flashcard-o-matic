@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { readDeck } from "../utils/api";
 
 /**
@@ -33,9 +33,9 @@ function DeckPage() {
       {/* Buttons */}
       <div className="d-flex justify-content-between">
         <div>
-          <button className="btn btn-secondary mr-2">Edit</button>
+          <Link className="btn btn-secondary mr-2" to={`/decks/${deckId}/edit`}>Edit</Link>
           <button className="btn btn-primary mr-2">Study</button>
-          <button className="btn btn-primary">Add Cards</button>
+          <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>Add Cards</Link>
         </div>
         <button className="btn btn-danger">Delete</button>
       </div>
@@ -48,12 +48,12 @@ function DeckPage() {
             <div className="card-body">
               <div className="d-flex justify-content-between">
                 <div>
-                  {card.front} {`Card id: ${card.id}`}
+                  {card.front} {card.id}
                 </div>
                 <div>{card.back}</div>
               </div>
               <div className="d-flex justify-content-end mt-2">
-                <button className="btn btn-secondary mr-2">Edit</button>
+                <Link className="btn btn-secondary mr-2" to={`/decks/${deckId}/cards/${card.id}/edit`}>Edit</Link>
                 <button className="btn btn-danger">Delete</button>
               </div>
             </div>
