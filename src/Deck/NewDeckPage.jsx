@@ -23,11 +23,13 @@ function NewDeckPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // I might need to make the ID an number. 
+    // Maybe something like Math.random(Date.now())
     const abortController = new AbortController();
     const signal = abortController.signal;
     const deck = {
       ...formData,
-      id: "_" + Math.random().toString(36).substring(2, 9),
+      id: Math.random(Date.now()),
     };
 
     createDeck(deck, signal);
