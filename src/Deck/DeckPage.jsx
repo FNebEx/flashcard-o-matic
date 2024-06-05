@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { readDeck } from "../utils/api";
+import { deleteCard, readDeck } from "../utils/api";
+import Card from "../Cards/Card";
 
 /**
  * A component that renders the contents of a specific deck.
@@ -11,10 +12,10 @@ function DeckPage() {
   const { deckId } = useParams();
   const [deck, setDeck] = useState(undefined);
 
-  useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
+  const abortController = new AbortController();
+  const signal = abortController.signal;
 
+  useEffect(() => {
     async function loadData() {
       const data = await readDeck(deckId, signal);
       setDeck(data);
@@ -25,6 +26,11 @@ function DeckPage() {
     // return abortController.abort();
   }, [deckId]);
 
+  const handleDelete = (id) => {
+    // deleteCard(id, signal)
+    alert(123)
+  };
+
   return (
     <>
       <h1>{deck && deck.name} </h1>
@@ -33,9 +39,13 @@ function DeckPage() {
       {/* Buttons */}
       <div className="d-flex justify-content-between">
         <div>
-          <Link className="btn btn-secondary mr-2" to={`/decks/${deckId}/edit`}>Edit</Link>
-          <button className="btn btn-primary mr-2">Study</button>
-          <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>Add Cards</Link>
+          <Link className="btn btn-secondary mr-2" to={`/decks/${deckId}/edit`}>
+            Edit
+          </Link>
+          <Link className="btn btn-primary mr-2" to={`/decks/${deckId}/study`}>Study</Link>
+          <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>
+            Add Cards
+          </Link>
         </div>
         <button className="btn btn-danger">Delete</button>
       </div>
@@ -44,20 +54,13 @@ function DeckPage() {
       <h3>Cards</h3>
       {deck &&
         deck?.cards.map((card) => (
-          <div key={card.id} className="card mb-3">
-            <div className="card-body">
-              <div className="d-flex justify-content-between">
-                <div>
-                  {card.front} {card.id}
-                </div>
-                <div>{card.back}</div>
-              </div>
-              <div className="d-flex justify-content-end mt-2">
-                <Link className="btn btn-secondary mr-2" to={`/decks/${deckId}/cards/${card.id}/edit`}>Edit</Link>
-                <button className="btn btn-danger">Delete</button>
-              </div>
-            </div>
-          </div>
+          <Card
+            key={card.id}
+            card={card}
+            id={card.id}
+            deckId={deckId}
+            deleteCard={() => handleDelete(card.id)}
+          />
         ))}
     </>
   );
