@@ -11,9 +11,14 @@
       "id": 2
     },
     {
-      "name": "Derp",
-      "description": "Teach me how to derp.",
-      "id": "_twrx1vu"
+      "name": "A new deck and stuff",
+      "description": "Trying a new deck",
+      "id": 0.36530432183842665
+    },
+    {
+      "name": "Here is a name!!!",
+      "description": "A real description of what the deck does. ",
+      "id": 0.20212932003006445
     }
   ],
   "cards": [
@@ -53,6 +58,70 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "front": "Why did the chicken cross the road?",
+      "back": "To get to the other side!",
+      "deckId": 1,
+      "id": "_h544hio"
+    },
+    {
+      "front": "Here is the first card in the deck.",
+      "back": "This should be some sort of question.",
+      "deckId": null,
+      "id": "_5ppu0iy"
+    },
+    {
+      "front": "Did this work?",
+      "back": "It should have...",
+      "deckId": null,
+      "id": "_t0g2emt"
+    },
+    {
+      "front": "One more time",
+      "back": "Public speaking",
+      "deckId": null,
+      "id": "_hnz54t7"
+    },
+    {
+      "front": "Front",
+      "back": "back",
+      "deckId": null,
+      "id": "_8i97pf8"
+    },
+    {
+      "front": "This works",
+      "back": "And so does this",
+      "deckId": 1,
+      "id": "_axkllhg"
+    },
+    {
+      "front": "Why is a raven like a writing desk? ",
+      "back": "Here is a new card!",
+      "id": "_cw07yfb",
+      "deckId": 20212932003006444
+    },
+    {
+      "front": "What is the DOM and stuff?",
+      "back": "The DOM is a object that is a representation of the HTML page.",
+      "id": "_dc5vjj3"
+    },
+    {
+      "front": "Why is a raven like a writing desk?",
+      "back": "Here is a third card. ",
+      "id": "_rtcuf3h"
+    },
+    {
+      "front": "Frist",
+      "back": "Here is the back of the card.",
+      "id": "_0idnzac",
+      "deckId": "0.20212932003006445"
+    },
+    {
+      "front": "Why is a raven like a writing desk? ",
+      "back": "Because it can produce a few notes, though they are very flat; and it is never put with the wrong end in front!",
+      "id": "_4xjk2m9",
+      "deckId": 0.20212932003006445
     }
   ]
 }
