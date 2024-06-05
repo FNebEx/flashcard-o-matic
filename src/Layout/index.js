@@ -12,12 +12,6 @@ import NewCardPage from "../Cards/NewCardPage";
 import CardEditPage from "../Cards/CardEditPage";
 
 function Layout() {
-  /**
-   * @TODO:
-   * 1. Mess around with the API to read all of the data.
-   * 2. Pass down the data via props.
-   */
-
   const [decks, setDecks] = useState(null);
   const navigate = useNavigate();
 
@@ -68,7 +62,10 @@ function Layout() {
             <Route path=":deckId/study" element={<DeckStudyPage />} />
             <Route path=":deckId/edit" element={<DeckEditPage />} />
             <Route path=":deckId/cards/new" element={<NewCardPage />} />
-            <Route path=":deckId/cards/:cardId/edit" element={<CardEditPage />} />
+            <Route
+              path=":deckId/cards/:cardId/edit"
+              element={<CardEditPage />}
+            />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
