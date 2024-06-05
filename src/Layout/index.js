@@ -8,6 +8,8 @@ import DeckPage from "../Deck/DeckPage";
 import DeckStudyPage from "../Deck/DeckStudyPage";
 import NewDeckPage from "../Deck/NewDeckPage";
 import DeckEditPage from "../Deck/DeckEditPage";
+import NewCardPage from "../Cards/NewCardPage";
+import CardEditPage from "../Cards/CardEditPage";
 
 function Layout() {
   /**
@@ -34,10 +36,14 @@ function Layout() {
     // return abortController.abort();
   }, []);
 
-  const hadndleDeleteDeck = async (id) => {
+  // Potentially pass this as a prop to the DeckPage component
+  const hadndleDeleteDeck = (id) => {
     if (window.confirm(`Are you sure you want to delete record ${id}`)) {
-      await deleteDeck(id, signal);
-      navigate('/')
+      console.log("deleted Deck ", id);
+      // deleteDeck(id, signal);
+      // navigate('/')
+    } else {
+      console.log("nothing");
     }
   };
 
@@ -61,7 +67,8 @@ function Layout() {
             <Route path=":deckId" element={<DeckPage />} />
             <Route path=":deckId/study" element={<DeckStudyPage />} />
             <Route path=":deckId/edit" element={<DeckEditPage />} />
-
+            <Route path=":deckId/cards/new" element={<NewCardPage />} />
+            <Route path=":deckId/cards/:cardId/edit" element={<CardEditPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
