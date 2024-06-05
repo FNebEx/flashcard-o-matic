@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { readDeck } from "../utils/api";
 
 function DeckStudyPage() {
@@ -46,9 +46,8 @@ function DeckStudyPage() {
   const handleNext = () => {
     setIndex(index >= length - 1 ? 0 : index + 1);
 
-
-    if(index  === length) {
-      alert(3)
+    if (index === length) {
+      alert(3);
     }
 
     setFlip(false);
@@ -58,12 +57,17 @@ function DeckStudyPage() {
     <>
       <h1>Study: {cards && cards.name}</h1>
 
-      {length === 0 ? (
+      {length < 3 ? (
         <>
           <h3>Not enough cards</h3>
-          <p>You need at least 3 cards to study. There are {length} cards this deck. </p>
+          <p>
+            You need at least 3 cards to study. There are {length} cards this
+            deck.{" "}
+          </p>
           {/* Links to the "Add Card" Screen */}
-          <button className="btn btn-primary">Add Card</button>
+          <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>
+            Add Card
+          </Link>
         </>
       ) : (
         <div className="card">
