@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { createCard } from "../utils/api";
+import { createCard, readDeck } from "../utils/api";
 
 function NewCardPage() {
   const { deckId } = useParams();
   const [formData, setFormData] = useState({ front: "", back: "" });
+  const [deck, setDeck] = useState(null);
 
   const deckID = deckId;
+
+  const abortController = new AbortController();
+  const signal = abortController.signal;
+
+  useEffect(() => {
+    async function loadData() {
+      const data = await readDeck(deckId, signal);
+
+      setDeck(data)
+    }
+
+    loadData();
+  }, []);
 
   const handleInputChange = (event) => {
     const { target } = event;
@@ -20,9 +34,6 @@ function NewCardPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
     const card = {
       ...formData,
       deckID,
@@ -32,14 +43,12 @@ function NewCardPage() {
     // deckId is being stored as null.
     createCard(deckId, card, signal);
 
-    console.log(card);
-
     setFormData({ front: "", back: "" });
   };
 
   return (
     <>
-      <h1>Get Deck Title for deck {deckId}: Add Card</h1>
+      <h1>{deck && deck.name}: Add Card</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
