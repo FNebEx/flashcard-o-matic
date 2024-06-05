@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { readDeck } from "../utils/api";
+import { Link, useParams } from "react-router-dom";
+import { readDeck, updateDeck } from "../utils/api";
 
 function DeckEditPage() {
   /**
@@ -11,6 +11,7 @@ function DeckEditPage() {
 
   const { deckId } = useParams();
   const [deck, setDeck] = useState([]);
+  const [formData, setFormData] = useState({ name: "", description: "" });
 
   const abortController = new AbortController();
   const signal = abortController.signal;
@@ -19,34 +20,57 @@ function DeckEditPage() {
     async function loadData() {
       const data = await readDeck(deckId, signal);
       setDeck(data);
+      setFormData({ name: data.name, description: data.description });
     }
 
     loadData();
   }, []);
 
+  const handleInputChange = (event) => {
+    const { target } = event;
+
+    setFormData({
+      ...formData,
+      [target.name]: target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const updatedDeck = {
+      ...formData,
+      id: deckId,
+    };
+
+    updateDeck(updatedDeck, signal);
+  };
   return (
     <>
       <h1>Edit Deck</h1>
-      <div className="form-group">
-        <label htmlFor="name">Name</label>
-        <input
-          className="form-control"
-          type="text"
-          name="name"
-          defaultValue={deck.name}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="description">Description</label>
-        <textarea
-          className="form-control"
-          name="description"
-          defaultValue={deck.description}
-        ></textarea>
-      </div>
-      <button className="btn btn-secondary mr-2">Cancel</button>
-      <button className="btn btn-primary">Submit</button>
-      <form></form>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            className="form-control"
+            type="text"
+            name="name"
+            defaultValue={deck.name}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea
+            className="form-control"
+            name="description"
+            defaultValue={deck.description}
+            onChange={handleInputChange}
+          ></textarea>
+        </div>
+        <Link className="btn btn-secondary mr-2" to={'/'}>Cancel</Link>
+        <button className="btn btn-primary">Submit</button>
+      </form>
     </>
   );
 }
