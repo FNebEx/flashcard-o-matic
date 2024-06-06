@@ -24,3 +24,4 @@ The final project for the Chegg Skills Frontend Web Development course.
 ### Featuers to complete
 
 1. Add the breadcrumbs to each page. 
+2. Le derp
