@@ -7,7 +7,7 @@ function Card({ card, deckId, deleteCard, id }) {
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <div>
-            {card.front} {card.id}
+            {card.front}
           </div>
           <div>{card.back}</div>
         </div>
