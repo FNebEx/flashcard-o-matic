@@ -10,6 +10,7 @@ The final project for the Chegg Skills Frontend Web Development course.
 4. Get the `<NotFound />` component to work properly.
 5. Get the `useNavigate` hook working after a use completes an action. 
 6. Find out why I'm getting a 500 error when attempting to delete a deck. 
+7. Make a breadcrumbs component.
 
 ### Routes to complete
 
