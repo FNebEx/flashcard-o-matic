@@ -12,10 +12,10 @@ function Deck({ name, description, id, cards, handleDelete }) {
         {/* TODO: Have view and study to the left and delete to the right */}
         <div className="d-flex">
           <div className="">
-            <Link className="btn btn-secondary" to={`/decks/${id}`}>
+            <Link className="btn btn-secondary mr-2" to={`/decks/${id}`}>
               View
             </Link>
-            <Link className="btn btn-primary" to={`/decks/${id}/study`}>
+            <Link className="btn btn-primary mr-2" to={`/decks/${id}/study`}>
               Study
             </Link>
           </div>

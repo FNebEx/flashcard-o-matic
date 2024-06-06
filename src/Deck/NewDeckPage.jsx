@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { createDeck } from "../utils/api";
+import { Link } from "react-router-dom";
+import Breadcrumbs from "../Breadcrumbs";
 
 function NewDeckPage() {
   /**
@@ -39,8 +41,12 @@ function NewDeckPage() {
 
   return (
     <>
+      {/** Breadcrumb trail. */}
+      <Breadcrumbs pageTitle={"Create Deck"}/>
+
       <h1>Create Deck</h1>
-      <form onSubmit={handleSubmit}>
+
+      <form className="mt-2" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { readCard, updateCard } from "../utils/api";
+import { Link, useParams } from "react-router-dom";
+import { readCard, readDeck, updateCard } from "../utils/api";
+import Breadcrumbs from "../Breadcrumbs";
 
 function CardEditPage() {
   const { cardId, deckId } = useParams();
   const [card, setCard] = useState({});
+  const [deckName, setDeckName] = useState('');
   const [formData, setFormData] = useState({ front: "", back: "" });
 
   const abortController = new AbortController();
@@ -13,6 +15,8 @@ function CardEditPage() {
   useEffect(() => {
     async function loadData() {
       const data = await readCard(cardId, signal);
+      const dataName = await readDeck(deckId, signal);
+      setDeckName(dataName);
       setCard(data);
       setFormData({ front: data.front, back: data.back });
     }
@@ -43,10 +47,11 @@ function CardEditPage() {
 
   return (
     <>
+      {/** Breadcrum trail */}
+      <Breadcrumbs deck={deckName} pageTitle={`Edit Card ${card.id}`}/>
+
       <h1>Edit Card</h1>
-      <h3>
-        Card id: {cardId} - Deck id: {deckId}
-      </h3>
+      
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="front">Front</label>

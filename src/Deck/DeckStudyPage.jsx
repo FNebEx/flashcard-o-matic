@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { readDeck } from "../utils/api";
+import Breadcrumbs from "../Breadcrumbs";
 
 function DeckStudyPage() {
   /**
@@ -14,6 +15,7 @@ function DeckStudyPage() {
    */
 
   const { deckId } = useParams();
+  // const location = useLocation();
   const [cards, setCards] = useState(null);
   const [index, setIndex] = useState(0);
   const [flip, setFlip] = useState(false);
@@ -55,6 +57,8 @@ function DeckStudyPage() {
 
   return (
     <>
+      <Breadcrumbs deck={cards} pageTitle={"Study"}/>
+
       <h1>Study: {cards && cards.name}</h1>
 
       {length < 3 ? (

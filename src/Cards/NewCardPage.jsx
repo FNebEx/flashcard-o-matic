@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api";
+import Breadcrumbs from "../Breadcrumbs";
 
 function NewCardPage() {
   const { deckId } = useParams();
@@ -48,6 +49,9 @@ function NewCardPage() {
 
   return (
     <>
+      {/** Breadcrumb Trail */}
+      <Breadcrumbs deck={deck} pageTitle={"Add Card"}/>
+
       <h1>{deck && deck.name}: Add Card</h1>
 
       <form onSubmit={handleSubmit}>

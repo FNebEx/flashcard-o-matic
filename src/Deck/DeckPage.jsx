@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { deleteCard, readDeck } from "../utils/api";
 import Card from "../Cards/Card";
+import Breadcrumbs from "../Breadcrumbs";
 
 /**
  * A component that renders the contents of a specific deck.
@@ -33,6 +34,13 @@ function DeckPage() {
 
   return (
     <>
+      {/** Breadcrumb Trail*/}
+      <Breadcrumbs deck={deck}/>
+
+      {/* <div>
+        <Link to={'/'}>Home</Link> / {deck && deck.name}
+      </div> */}
+
       <h1>{deck && deck.name} </h1>
       <p>{deck && deck.description}</p>
 

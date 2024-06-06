@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { readDeck, updateDeck } from "../utils/api";
+import Breadcrumbs from "../Breadcrumbs";
 
 function DeckEditPage() {
   /**
@@ -47,6 +48,9 @@ function DeckEditPage() {
   };
   return (
     <>
+      {/** Breadcrumbs*/}
+      <Breadcrumbs deck={deck} pageTitle={"Edit Deck"}/>
+
       <h1>Edit Deck</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
