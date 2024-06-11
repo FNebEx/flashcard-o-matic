@@ -1,75 +1,29 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { deleteCard, readDeck } from "../utils/api";
-import Card from "../Cards/Card";
-import Breadcrumbs from "../Breadcrumbs";
+import { useParams, Routes, Route } from "react-router-dom";
+import DeckStudyPage from "./DeckStudyPage";
+import DeckDetailsPage from "./DeckDetailsPage";
+import NotFound from "../Layout/NotFound";
+import DeckEditPage from "./DeckEditPage";
+import CardEditPage from "../Cards/CardEditPage";
+import NewCardPage from "../Cards/NewCardPage";
 
 /**
- * A component that renders the contents of a specific deck.
- *
- * @returns {JSX.Element}
+ * A component that acts as an outlet for routes to be rendered to.
+ * @returns
  */
+
 function DeckPage() {
   const { deckId } = useParams();
-  const [deck, setDeck] = useState(undefined);
-
-  const abortController = new AbortController();
-  const signal = abortController.signal;
-
-  useEffect(() => {
-    async function loadData() {
-      const data = await readDeck(deckId, signal);
-      setDeck(data);
-    }
-
-    loadData();
-
-    // return abortController.abort();
-  }, [deckId]);
-
-  const handleDelete = (id) => {
-    // deleteCard(id, signal)
-    alert(123)
-  };
 
   return (
     <>
-      {/** Breadcrumb Trail*/}
-      <Breadcrumbs deck={deck}/>
-
-      {/* <div>
-        <Link to={'/'}>Home</Link> / {deck && deck.name}
-      </div> */}
-
-      <h1>{deck && deck.name} </h1>
-      <p>{deck && deck.description}</p>
-
-      {/* Buttons */}
-      <div className="d-flex justify-content-between">
-        <div>
-          <Link className="btn btn-secondary mr-2" to={`/decks/${deckId}/edit`}>
-            Edit
-          </Link>
-          <Link className="btn btn-primary mr-2" to={`/decks/${deckId}/study`}>Study</Link>
-          <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>
-            Add Cards
-          </Link>
-        </div>
-        <button className="btn btn-danger">Delete</button>
-      </div>
-
-      {/* cards */}
-      <h3>Cards</h3>
-      {deck &&
-        deck?.cards.map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            id={card.id}
-            deckId={deckId}
-            deleteCard={() => handleDelete(card.id)}
-          />
-        ))}
+      <Routes>
+        <Route path="/" element={<DeckDetailsPage />} />
+        <Route path="/study" element={<DeckStudyPage />} />
+        <Route path="/edit" element={<DeckEditPage />} />
+        <Route path="/cards/new" element={<NewCardPage />} />
+        <Route path="/cards/:cardId/edit" element={<CardEditPage />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }

@@ -71,7 +71,7 @@ function CardEditPage() {
             onChange={handleInputChage}
           ></textarea>
         </div>
-        <button className="btn btn-secondary">Cancel</button>
+        <button className="btn btn-secondary mr-2">Cancel</button>
         <button className="btn btn-primary" type="submit">
           submit
         </button>

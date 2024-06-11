@@ -17,6 +17,8 @@ function DeckEditPage() {
   const abortController = new AbortController();
   const signal = abortController.signal;
 
+  console.log(typeof deckId);
+
   useEffect(() => {
     async function loadData() {
       const data = await readDeck(deckId, signal);

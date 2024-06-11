@@ -5,14 +5,10 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import DeckList from "../Deck/DeckList";
 import { deleteDeck, listDecks } from "../utils/api";
 import DeckPage from "../Deck/DeckPage";
-import DeckStudyPage from "../Deck/DeckStudyPage";
 import NewDeckPage from "../Deck/NewDeckPage";
-import DeckEditPage from "../Deck/DeckEditPage";
-import NewCardPage from "../Cards/NewCardPage";
-import CardEditPage from "../Cards/CardEditPage";
 
 function Layout() {
-  const [decks, setDecks] = useState(null);
+  // const [decks, setDecks] = useState(null);
   const navigate = useNavigate();
 
   const abortController = new AbortController();
@@ -22,24 +18,13 @@ function Layout() {
     async function loadData() {
       const data = await listDecks(signal);
 
-      setDecks(data);
+      // setDecks(data);
     }
 
     loadData();
-
-    // return abortController.abort();
   }, []);
 
   // Potentially pass this as a prop to the DeckPage component
-  const hadndleDeleteDeck = (id) => {
-    if (window.confirm(`Are you sure you want to delete record ${id}`)) {
-      console.log("deleted Deck ", id);
-      // deleteDeck(id, signal);
-      // navigate('/')
-    } else {
-      console.log("nothing");
-    }
-  };
 
   return (
     <div>
@@ -49,13 +34,19 @@ function Layout() {
 
         {/* Routes */}
         <Routes>
+          <Route path="/" element={<DeckList />} />
+          <Route path="/decks/new" element={<NewDeckPage />} />
+          <Route path="/decks/:deckId/*" element={<DeckPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
+        {/* <Routes>
           <Route
             path="/"
             element={
               <DeckList decks={decks} handleDelete={hadndleDeleteDeck} />
             }
           />
-          {/* Deck Routes */}
           <Route path="/decks">
             <Route path="new" element={<NewDeckPage />} />
             <Route path=":deckId" element={<DeckPage />} />
@@ -68,7 +59,7 @@ function Layout() {
             />
           </Route>
           <Route path="*" element={<NotFound />} />
-        </Routes>
+        </Routes> */}
       </div>
     </div>
   );

@@ -11,14 +11,9 @@
       "id": 2
     },
     {
-      "name": "A new deck and stuff",
-      "description": "Trying a new deck",
-      "id": 0.36530432183842665
-    },
-    {
-      "name": "Redux",
-      "description": "State management.",
-      "id": 0.20212932003006445
+      "name": "Frustrated",
+      "description": "AAHHGG!!!",
+      "id": 0.5698627960347926
     }
   ],
   "cards": [
@@ -120,7 +115,6 @@
     {
       "front": "How to delete an item? ",
       "back": "Use a delete handler. ",
-      "deckID": "0.20212932003006445",
       "id": "_c89ggnk",
       "deckId": 0.20212932003006445
     },
@@ -129,6 +123,13 @@
       "back": "an object with data. ",
       "deckID": "0.20212932003006445",
       "id": "_cgs2ntv",
+      "deckId": 0.20212932003006445
+    },
+    {
+      "front": "Front side of the card.",
+      "back": "Back side of the card.",
+      "deckID": "0.20212932003006445",
+      "id": "_enr9p64",
       "deckId": 0.20212932003006445
     }
   ]
